@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  repository_dispatch:
+    types: [run_build]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install Ubuntu texinfo bison flex
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install texinfo bison flex
+    
+    - name: Install Mac texinfo bison flex
+      if: matrix.os == 'macOS-latest'
+      run: |
+        brew update
+        brew install texinfo bison flex
+
+    - name: Runs all the stages in the shell
+      run: |
+        export PS2DEV=$PWD/ps2dev
+        export PS2SDK=$PS2DEV/ps2sdk
+        export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
+        ./build-all.sh
