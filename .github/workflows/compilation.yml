@@ -32,5 +32,32 @@ jobs:
       run: |
         export PS2DEV=$PWD/ps2dev
         export PS2SDK=$PS2DEV/ps2sdk
+        export GSKIT=$PS2DEV/gsKit
         export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
         ./build-all.sh
+    
+    - name: Compress ps2dev folder
+      run: |
+        tar -zcvf ps2dev.tar.gz ps2dev
+    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: ps2dev-${{matrix.os}}
+        path: ps2dev.tar.gz
+    
+    - name: Extract tag name
+      id: tag
+      uses: actions/github-script@0.2.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          return context.payload.ref.replace(/\/refs\/tags\//, '');
+    
+    - name: Release
+      if: startsWith(github.ref, 'refs/tags/')
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ps2dev.tar.gz
+        tag_name: ${{ steps.tag.outputs.result }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
