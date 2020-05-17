@@ -1,4 +1,3 @@
-
 #!/bin/bash
 # toolchain.sh by fjtrujy
 

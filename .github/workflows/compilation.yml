@@ -16,17 +16,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Install Ubuntu texinfo bison flex
+    - name: Install Ubuntu texinfo bison flex libucl-dev
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt-get update
-        sudo apt-get -y install texinfo bison flex
+        sudo apt-get -y install texinfo bison flex libucl-dev
     
-    - name: Install Mac texinfo bison flex
+    - name: Install Mac texinfo bison flex ucl
       if: matrix.os == 'macOS-latest'
       run: |
         brew update
-        brew install texinfo bison flex
+        brew install texinfo bison flex ucl
 
     - name: Runs all the stages in the shell
       run: |
@@ -47,7 +47,7 @@ jobs:
     
     - name: Extract tag name
       id: tag
-      uses: actions/github-script@0.2.0
+      uses: actions/github-script@0.9.0
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
