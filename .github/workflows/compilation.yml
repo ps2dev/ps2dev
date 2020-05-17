@@ -35,6 +35,10 @@ jobs:
         export GSKIT=$PS2DEV/gsKit
         export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
         ./build-all.sh
+
+    - name: Get short SHA
+      id: slug
+      run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
     
     - name: Compress ps2dev folder
       run: |
@@ -42,7 +46,7 @@ jobs:
     
     - uses: actions/upload-artifact@v2
       with:
-        name: ps2dev-${{matrix.os}}
+        name: ps2dev-${{ steps.slug.outputs.sha8 }}-${{matrix.os}}
         path: ps2dev.tar.gz
     
     - name: Extract tag name
