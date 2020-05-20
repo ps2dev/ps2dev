@@ -18,20 +18,9 @@ jobs:
 
     - name: Upload latest Docker version
       uses: docker/build-push-action@v1
-      if: startsWith(github.ref, 'refs/tags/') != true
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ env.GITHUB_REPOSITORY }}
-        tags: latest
         build_args: BASE_DOCKER_IMAGE=${{ github.repository_owner }}/ps2sdk-ports:latest
-
-    - name: Upload tagged Docker version
-      uses: docker/build-push-action@v1
-      if: contains(github.ref, 'refs/tags/v')
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        repository: ${{ env.GITHUB_REPOSITORY }}
-        tagging: true
-        build_args: BASE_DOCKER_IMAGE=${{ github.repository_owner }}/ps2sdk-ports:latest
+        tag_with_ref: true
