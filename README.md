@@ -20,7 +20,7 @@ These scripts download (`git clone`) and install:
 1. Install gcc/clang, make, patch, git, texinfo wget, zlib and ucl if you don't have those.
 
 2. Add this to your login script (example: ~/.bash_profile)  
-```
+```bash
 export PS2DEV=/usr/local/ps2dev
 export PS2SDK=$PS2DEV/ps2sdk
 export GSKIT=$PS2DEV/gsKit
@@ -40,6 +40,13 @@ If you want, you *JUST* can install the extra dependencies as `ps2client and ps2
 
 ```
 ./build-extra.sh
+```
+
+### macOS
+If you download the pre-built macOS binaries and get a security error such as _`"ps2client" cannot be opened because the developer cannot be verified.`_, you can remove the quarantine attribute by running:
+
+```bash
+xattr -dr com.apple.quarantine path/to/ps2toolchain
 ```
 
 ## Thanks
