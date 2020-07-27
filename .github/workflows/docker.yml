@@ -24,3 +24,16 @@ jobs:
         repository: ${{ env.GITHUB_REPOSITORY }}
         build_args: BASE_DOCKER_IMAGE=${{ github.repository_owner }}/ps2sdk-ports:latest
         tag_with_ref: true
+
+    - name: Send Compile action
+      run: |
+        export DISPATCH_ACTION="$(echo run_build)"
+        echo "::set-env name=NEW_DISPATCH_ACTION::$DISPATCH_ACTION"
+
+    - name: Repository Dispatch to ps2homebrew ps2dev_forwarder to do broadcast over there
+      uses: peter-evans/repository-dispatch@v1
+      with:
+        repository: ps2homebrew/ps2dev_forwarder
+        token: ${{ secrets.DISPATCH_TOKEN }}
+        event-type: ${{ env.NEW_DISPATCH_ACTION }}
+        client-payload: '{"ref": "${{ github.ref }}"}'
