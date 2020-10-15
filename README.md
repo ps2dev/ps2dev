@@ -25,8 +25,8 @@ export PS2SDK=$PS2DEV/ps2sdk
 export GSKIT=$PS2DEV/gsKit
 export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
 ```
-4. Run build-all.sh  
-```
+3. Run build-all.sh  
+```bash
 ./build-all.sh
 ```
 
@@ -36,7 +36,7 @@ This repo also uses CI/CD to create a docker image called `ps2dev/ps2dev:latest`
 ## Extra steps
 If you want, you can *JUST* install the extra dependencies as `ps2client and ps2-packer`. To achieve this just execute
 
-```
+```bash
 ./build-extra.sh
 ```
 
