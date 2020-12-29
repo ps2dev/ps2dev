@@ -6,13 +6,17 @@
 unset PS2SDKSRC
 
 ## Download the source code.
-if test ! -d "ps2sdk/.git"; then
-	git clone https://github.com/ps2dev/ps2sdk && cd ps2sdk || exit 1
-else
-	cd ps2sdk &&
-		git pull && git fetch origin &&
-		git reset --hard origin/master || exit 1
+REPO_URL="https://github.com/ps2dev/ps2sdk"
+REPO_FOLDER="ps2sdk"
+
+# Checking if a specific TAG has been selected, it is passed using parameter $1
+[  -z "$1" ] && REPO_REFERENCE="origin/master" || REPO_REFERENCE=$1
+echo "Using repo reference $REPO_REFERENCE"
+
+if test ! -d "$REPO_FOLDER"; then
+	git clone $REPO_URL|| exit 1
 fi
+cd $REPO_FOLDER && git fetch origin && git reset --hard ${REPO_REFERENCE} || exit 1
 
 ## Determine the maximum number of processes that Make can work with.
 #OSVER=$(uname)
