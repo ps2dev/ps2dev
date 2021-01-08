@@ -33,5 +33,5 @@ cd $REPO_FOLDER && git fetch origin && git reset --hard ${REPO_REFERENCE} || exi
 make --quiet clean && make --quiet && make --quiet install && make --quiet clean || { exit 1; }
 
 ## gcc needs to include both libps2sdkc and libkernel from ps2sdk to be able to build executables.
-ln -sf "$PS2SDK/ee/lib/libps2sdkc.a" "$PS2DEV/ee/ee/lib/libps2sdkc.a" || { exit 1; }
-ln -sf "$PS2SDK/ee/lib/libkernel.a"  "$PS2DEV/ee/ee/lib/libkernel.a"  || { exit 1; }
+ln -sf "$PS2SDK/ee/lib/libps2sdkc.a" "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libps2sdkc.a" || { exit 1; }
+ln -sf "$PS2SDK/ee/lib/libkernel.a"  "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libkernel.a" || { exit 1; }

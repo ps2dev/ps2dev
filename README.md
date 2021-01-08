@@ -1,5 +1,6 @@
 # ps2dev
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ps2dev/ps2dev/CI?label=CI&logo=github&style=for-the-badge)](https://github.com/ps2dev/ps2dev/actions?query=workflow%3ACI)[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/ps2dev/ps2dev/CI-Docker?label=CI-Docker&logo=github&style=for-the-badge)](https://github.com/ps2dev/ps2dev/actions?query=workflow%3ACI-Docker)[![Docker Pulls](https://img.shields.io/docker/pulls/ps2dev/ps2dev?style=for-the-badge)](https://hub.docker.com/r/ps2dev/ps2dev/tags)
+
 Main PS2 Repo for building the whole `PS2 Development` environment in your local machine.
 
 This program will automatically build and install the whole a compiler and other tools used in the creation of homebrew software for the Sony PlayStation® 2 videogame system.
@@ -15,7 +16,7 @@ These scripts download (`git clone`) and install:
 
 ## Requirements
 
-1. Install gcc/clang, make, patch, git, texinfo wget, zlib and ucl if you don't have those.
+1. Install gcc/clang, make, patch, git, texinfo, flex, bison, wget, gsl, gmp, mpfr and mpc if you don't have those.
 
 2. Add this to your login script (example: `~/.bash_profile`) 
 **Note:** Ensure that you have full access to the PS2DEV path. You can change the PS2DEV path with the following requirements: use only absolute paths, don't use spaces, use only Latin characters.

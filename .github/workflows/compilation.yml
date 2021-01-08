@@ -22,13 +22,13 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt-get update
-        sudo apt-get -y install texinfo bison flex libucl-dev
+        sudo apt-get -y install texinfo bison flex libgmp3-dev libmpfr-dev libmpc-dev
     
     - name: Install Mac texinfo bison flex ucl
       if: matrix.os == 'macOS-latest'
       run: |
         brew update
-        brew install texinfo bison flex ucl
+        brew install texinfo bison flex gnu-sed gsl gmp mpfr
 
     - name: Switch to Xcode 11.7
       if: matrix.os == 'macOS-latest'
@@ -40,6 +40,7 @@ jobs:
         export PS2DEV=$PWD/ps2dev
         export PS2SDK=$PS2DEV/ps2sdk
         export GSKIT=$PS2DEV/gsKit
+        export PATH="/usr/local/opt/gnu-sed/libexec/gnubin:$PATH"
         export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
         ./build-all.sh
 
