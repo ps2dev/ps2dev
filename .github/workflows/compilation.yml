@@ -22,7 +22,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: |
         sudo apt-get update
-        sudo apt-get -y install texinfo bison flex libgmp3-dev libmpfr-dev libmpc-dev
+        sudo apt-get -y install texinfo bison flex gettext libgmp3-dev libmpfr-dev libmpc-dev
     
     - name: Install Mac texinfo bison flex ucl
       if: matrix.os == 'macOS-latest'
