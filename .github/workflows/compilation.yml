@@ -30,11 +30,6 @@ jobs:
         brew update
         brew install texinfo bison flex gnu-sed gsl gmp mpfr
 
-    - name: Switch to Xcode 11.7
-      if: matrix.os == 'macOS-latest'
-      run: |
-        sudo xcode-select --switch /Applications/Xcode_11.7.app
-
     - name: Runs all the stages in the shell
       run: |
         export PS2DEV=$PWD/ps2dev
