@@ -60,7 +60,18 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       id: tag
       run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-    
+
+    - name: Create pre-release
+      if: github.ref == 'refs/heads/master'
+      uses: softprops/action-gh-release@v1
+      with:
+        files: ps2dev-${{matrix.os}}.tar.gz
+        prerelease: true
+        name: "Development build"
+        tag_name: "latest"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     - name: Release
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
