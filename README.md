@@ -10,13 +10,14 @@ This program will automatically build and install the whole a compiler and other
 These scripts download (`git clone`) and install: 
 - [ps2toolchain](https://github.com/ps2dev/ps2toolchain "ps2toolchain") 
 - [ps2sdk](https://github.com/ps2dev/ps2sdk "ps2sdk") 
+- [ps2sdk-ports](https://github.com/ps2dev/ps2sdk-ports "ps2sdk-ports")
 - [gsKit](https://github.com/ps2dev/gsKit "gsKit") 
 - [ps2-packer](https://github.com/ps2dev/ps2-packer "ps2-packer") 
 - [ps2client](https://github.com/ps2dev/ps2client "ps2client")
 
 ## Requirements
 
-1. Install gcc/clang, make, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, mpfr and mpc if you don't have those.
+1. Install gcc/clang, make, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, mpfr, mpc, cmake and libsdl2-image-dev if you don't have those.
 
 2. Add this to your login script (example: `~/.bash_profile`) 
 **Note:** Ensure that you have full access to the PS2DEV path. You can change the PS2DEV path with the following requirements: use only absolute paths, don't use spaces, use only Latin characters.
