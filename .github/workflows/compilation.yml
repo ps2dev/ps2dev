@@ -8,10 +8,14 @@ on:
 
 jobs:
   build:
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ matrix.os[0] }}
     strategy:
       matrix:
-        os: [macos-latest, ubuntu-latest]
+        os: [[macos-latest, bash], [ubuntu-latest, bash], [windows-latest, msys2]]
+      fail-fast: false
+    defaults:
+     run:
+      shell: ${{ matrix.os[1] }} {0}
 
     steps:
     - uses: actions/checkout@v2
@@ -19,18 +23,32 @@ jobs:
         fetch-depth: 0
     
     - name: Install Ubuntu texinfo bison flex libucl-dev
-      if: matrix.os == 'ubuntu-latest'
+      if: matrix.os[0] == 'ubuntu-latest'
       run: |
         sudo apt-get update
         sudo apt-get -y install texinfo bison flex gettext libgmp3-dev libmpfr-dev libmpc-dev
+        echo "MSYSTEM=x64" >> $GITHUB_ENV
     
     - name: Install Mac texinfo bison flex ucl
-      if: matrix.os == 'macOS-latest'
+      if: matrix.os[0] == 'macOS-latest'
       run: |
         brew update
         brew install texinfo bison flex gnu-sed gsl gmp mpfr
+        echo "MSYSTEM=x64" >> $GITHUB_ENV
+
+    - name: Install MSYS2 texinfo bison flex
+      if: matrix.os[0] == 'windows-latest'
+      uses: msys2/setup-msys2@v2
+      with:
+        msystem: MINGW32
+        install: |
+          base-devel git make texinfo flex bison patch binutils mingw-w64-i686-gcc mpc-devel tar
+          mingw-w64-i686-cmake mingw-w64-i686-extra-cmake-modules mingw-w64-i686-make
+        update: true
+        shell: msys2 {0}
 
     - name: Runs all the stages in the shell
+      continue-on-error: true
       run: |
         export PS2DEV=$PWD/ps2dev
         export PS2SDK=$PS2DEV/ps2sdk
@@ -41,20 +59,16 @@ jobs:
 
     - name: Get short SHA
       id: slug
-      run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
-    
-    - name: Compress ps2dev folder
+      run: echo "::set-output name=sha8::${MSYSTEM}-sha[$(echo ${GITHUB_SHA} | cut -c1-8)]"
+
+    - name: Prepare ps2dev folder
       run: |
-        tar -zcvf ps2dev.tar.gz ps2dev
-    
+        tar -zcvf ps2dev-${{matrix.os[0]}}.tar.gz ps2dev
+
     - uses: actions/upload-artifact@v2
       with:
-        name: ps2dev-${{ steps.slug.outputs.sha8 }}-${{matrix.os}}
-        path: ps2dev.tar.gz
-    
-    - name: Rename ps2dev.tar.gz file
-      run: |
-        mv ps2dev.tar.gz ps2dev-${{matrix.os}}.tar.gz
+        name: ps2dev-${{matrix.os[0]}}-${{ steps.slug.outputs.sha8 }}
+        path: ps2dev-${{matrix.os[0]}}.tar.gz
 
     - name: Extract tag name
       if: startsWith(github.ref, 'refs/tags/')
@@ -65,7 +79,7 @@ jobs:
       if: github.ref == 'refs/heads/master'
       uses: softprops/action-gh-release@v1
       with:
-        files: ps2dev-${{matrix.os}}.tar.gz
+        files: ps2dev-${{matrix.os[0]}}.tar.gz
         prerelease: true
         name: "Development build"
         tag_name: "latest"
@@ -76,7 +90,7 @@ jobs:
       if: startsWith(github.ref, 'refs/tags/')
       uses: softprops/action-gh-release@v1
       with:
-        files: ps2dev-${{matrix.os}}.tar.gz
+        files: ps2dev-${{matrix.os[0]}}.tar.gz
         tag_name: ${{ steps.tag.outputs.VERSION }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
