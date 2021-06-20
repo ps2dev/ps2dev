@@ -26,7 +26,14 @@ export PS2SDK=$PS2DEV/ps2sdk
 export GSKIT=$PS2DEV/gsKit
 export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
 ```
-3. Run build-all.sh  
+
+3. Create PS2DEV, PS2SDK and GSKIT dirs:  
+```bash
+mkdir $PS2DEV $PS2SDK $GSKIT
+```
+Note: make sure your user has proper read/write/execute permissions to these folders or change PS2DEV folder location so you won't have common permissions problems
+
+4. Run build-all.sh  
 ```bash
 ./build-all.sh
 ```
