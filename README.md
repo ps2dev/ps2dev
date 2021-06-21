@@ -16,7 +16,7 @@ These scripts download (`git clone`) and install:
 
 ## Requirements
 
-1. Install gcc/clang, make, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, mpfr and mpc if you don't have those.
+1. Install gcc/clang, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, mpfr and mpc if you don't have those.
 
 2. Add this to your login script (example: `~/.bash_profile`) 
 **Note:** Ensure that you have full access to the PS2DEV path. You can change the PS2DEV path with the following requirements: use only absolute paths, don't use spaces, use only Latin characters.
