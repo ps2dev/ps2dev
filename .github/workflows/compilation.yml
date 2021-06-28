@@ -21,14 +21,14 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0
-    
+
     - name: Install Ubuntu texinfo bison flex libucl-dev
       if: matrix.os[0] == 'ubuntu-latest'
       run: |
         sudo apt-get update
         sudo apt-get -y install texinfo bison flex gettext libgmp3-dev libmpfr-dev libmpc-dev
         echo "MSYSTEM=x64" >> $GITHUB_ENV
-    
+
     - name: Install Mac texinfo bison flex ucl
       if: matrix.os[0] == 'macOS-latest'
       run: |
