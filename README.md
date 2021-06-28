@@ -10,6 +10,7 @@ This program will automatically build and install the whole a compiler and other
 These scripts download (`git clone`) and install: 
 - [ps2toolchain](https://github.com/ps2dev/ps2toolchain "ps2toolchain") 
 - [ps2sdk](https://github.com/ps2dev/ps2sdk "ps2sdk") 
+- [ps2sdk-ports](https://github.com/ps2dev/ps2sdk-ports "ps2sdk-ports")
 - [gsKit](https://github.com/ps2dev/gsKit "gsKit") 
 - [ps2-packer](https://github.com/ps2dev/ps2-packer "ps2-packer") 
 - [ps2client](https://github.com/ps2dev/ps2client "ps2client")
