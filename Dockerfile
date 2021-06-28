@@ -8,7 +8,7 @@ RUN apk add build-base git bash patch wget zlib-dev ucl-dev
 RUN cd /src && ./build-extra.sh
 
 # Second stage of Dockerfile
-FROM alpine:latest  
+FROM alpine:latest
 
 ENV PS2DEV /usr/local/ps2dev
 ENV PS2SDK $PS2DEV/ps2sdk

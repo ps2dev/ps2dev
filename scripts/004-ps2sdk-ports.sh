@@ -10,9 +10,9 @@ REPO_FOLDER="ps2sdk-ports"
 echo "Using repo reference $REPO_REFERENCE"
 
 if test ! -d "$REPO_FOLDER"; then
-	git clone $REPO_URL -b ${REPO_REFERENCE} || exit 1
+  git clone $REPO_URL -b "${REPO_REFERENCE}" || exit 1
 fi
-cd $REPO_FOLDER && git fetch origin && git reset --hard origin/${REPO_REFERENCE} && git checkout ${REPO_REFERENCE} || exit 1
+cd "$REPO_FOLDER" && git fetch origin && git reset --hard "origin/${REPO_REFERENCE}" && git checkout "${REPO_REFERENCE}" || exit 1
 
 ## Build and install.
 make --quiet || { exit 1; }
