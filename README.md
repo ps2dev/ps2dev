@@ -19,7 +19,7 @@ These scripts download (`git clone`) and install:
 
 ## Requirements
 
-1.  Install gcc/clang, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, mpfr and mpc if you don't have those.
+1.  Install gcc/clang, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib1g-dev, mpfr and mpc if you don't have those.
 
 2.  _Optional._ If you are upgrading from the previous version of the PS2DEV environment, it is highly recommended to remove the content of the PS2DEV folder before upgrade. This is a necessary step after the major toolchain upgrade.
 ```bash
