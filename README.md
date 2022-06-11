@@ -19,20 +19,17 @@ These scripts download (`git clone`) and install:
 
 ## Requirements
 
-1.  Install gcc/clang, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib, mpfr and mpc if you don't have those.
-
+1.  Install gcc/clang, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib, mpfr and mpc if you don't have those packages.
 2.  _Optional._ If you are upgrading from the previous version of the PS2DEV environment, it is highly recommended to remove the content of the PS2DEV folder before upgrade. This is a necessary step after the major toolchain upgrade.
 ```bash
 sudo rm -rf $PS2DEV
 ```
-
-3.  Ensure that you have enough permissions for managing PS2DEV location (default to `/usr/local/ps2dev`, but you can use a different path). PS2DEV location MUST NOT have spaces or special characters in its path! PS2DEV should be an absolute path. On Unix systems, if the command `mkdir -p $PS2DEV` fails for you, you can set access for the current user by running commands:
+3.  Ensure that you have enough permissions for managing PS2DEV location (which defaults to `/usr/local/ps2dev`, but you can use a different path). PS2DEV location MUST NOT have spaces or special characters in its path! PS2DEV should be an absolute path. On Unix systems, if the command `mkdir -p $PS2DEV` fails for you, you can set access for the current user by running commands:
 ```bash
 export PS2DEV=/usr/local/ps2dev
 sudo mkdir -p $PS2DEV
 sudo chown -R $USER: $PS2DEV
 ```
-
 4.  Add this to your login script (example: `~/.bash_profile`)
     **Note:** Ensure that you have full access to the PS2DEV path. You can change the PS2DEV path with the following requirements: only use absolute paths, don't use spaces, only use Latin characters.
 ```bash
@@ -41,7 +38,6 @@ export PS2SDK=$PS2DEV/ps2sdk
 export GSKIT=$PS2DEV/gsKit
 export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS2SDK/bin
 ```
-
 5.  Run build-all.sh
 ```bash
 ./build-all.sh
@@ -53,7 +49,7 @@ This repo also uses CI/CD to create a docker image called `ps2dev/ps2dev:latest`
 
 ## Extra steps
 
-If you want, you can _JUST_ install the extra dependencies as `ps2client and ps2-packer`. To achieve this execute
+If you want, you can _JUST_ install the extra dependencies `ps2client` and `ps2-packer`. To achieve this, execute the following:
 ```bash
 ./build-extra.sh
 ```
