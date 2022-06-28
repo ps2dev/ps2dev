@@ -60,15 +60,16 @@ jobs:
         export DISPATCH_ACTION="$(echo run_build)"
         echo "NEW_DISPATCH_ACTION=$DISPATCH_ACTION" >> $GITHUB_ENV
 
-    - name: "create payload with parent payload"
-      if: ${{ github.event_name }} == 'repository_dispatch'
+    - name: "create payload with this repository payload"
+      if: ${{ github.event_name }} != 'repository_dispatch'
       run: |
         export REPO_PAYLOAD="$(echo {\"ref\": \"${{ github.ref }}\", \"parent\": \"${{ github.repository }}\", \"parent_sha\": \"${{ steps.slug.outputs.sha8 }}\"})"
         echo "NEW_REPO_PAYLOAD=$REPO_PAYLOAD" >> $GITHUB_ENV
-    - name: "create payload with current repository payload"
-      if: ${{ github.event_name }} != 'repository_dispatch'
+
+    - name: "create payload with parent repository payload"
+      if: ${{ github.event_name }} == 'repository_dispatch'
       run: |
-        export REPO_PAYLOAD="$(echo {\"ref\": \"${{ github.ref }}\"})"
+        export REPO_PAYLOAD="$(echo {\"ref\": \"${{ github.ref }}\", \"parent:\" \"${{ github.event.client_payload.parent }}\", \"parent_sha\": \"${{ github.event.client_payload.parent_sha }}\"})"
         echo "NEW_REPO_PAYLOAD=$REPO_PAYLOAD" >> $GITHUB_ENV
 
     - name: Repository Dispatch to ps2homebrew ps2dev_forwarder to do broadcast over there
