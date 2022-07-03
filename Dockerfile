@@ -2,10 +2,12 @@ ARG BASE_DOCKER_IMAGE
 
 FROM $BASE_DOCKER_IMAGE
 
-COPY . /src
+COPY . /workspace/ps2dev
+WORKDIR /workspace/ps2dev
+ENV PS2_WORKSPACE /workspace
 
 RUN apk add build-base git bash patch wget zlib-dev ucl-dev
-RUN cd /src && ./build-extra.sh
+RUN ./build-extra.sh && ./build-manifest.sh
 
 # Second stage of Dockerfile
 FROM alpine:latest
