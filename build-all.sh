@@ -46,3 +46,16 @@ else
   for SCRIPT in ${BUILD_SCRIPTS[@]}; do "$SCRIPT" "$TAG" || { echo "$SCRIPT: Failed."; exit 1; } done
 
 fi
+
+## Generate 'google repo' pinned manifest
+cp ../ps2dev.xml $PS2DEV/ps2dev.xml
+for REPO in $(find -type d -maxdepth 1 -not -name ".repo"); do
+  #if $REPO == ps2dev
+  if [ "$REPO" = "." ]; then
+    NAME="ps2dev"
+  else
+    NAME=$(basename $REPO)
+  fi
+  echo $REPO
+  xml ed --inplace -a "/manifest/project[@name='$NAME.git']" -t attr -n "revision" -v $(git -C $REPO rev-parse --revs-only HEAD) $PS2DEV/ps2dev.xml
+done

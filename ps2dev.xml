@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote name="ps2dev" fetch="https://github.com/ps2dev"/>
+  <default revision="master" remote="ps2dev" sync-j="8"/>
+
+  <project path="ps2dev" name="ps2dev.git"/>
+  <project path="ps2toolchain" name="ps2toolchain.git"/>
+  <project path="ps2sdk" name="ps2sdk.git"/>
+  <project path="gskit" name="gskit.git"/>
+  <project path="ps2sdk-ports" name="ps2sdk-ports.git"/>
+  <project path="ps2-packer" name="ps2-packer.git"/>
+  <project path="ps2client" name="ps2client.git"/>
+</manifest>
