@@ -32,8 +32,9 @@ cd "$REPO_FOLDER" && git fetch origin && git reset --hard "origin/${REPO_REFEREN
 # Workaround 2018/10/18: remove -j as the ps2toolchain's Makefiles do not have dependencies set up properly.
 make --quiet clean && make --quiet && make --quiet install && make --quiet clean || { exit 1; }
 
-## gcc needs to include libcglue, libkernel and libcdvd from ps2sdk to be able to build executables,
+## gcc needs to include libcglue, libptrheadglue, libkernel and libcdvd from ps2sdk to be able to build executables,
 ## because they are part of the standard libraries
 ln -sf "$PS2SDK/ee/lib/libcglue.a" "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libcglue.a" || { exit 1; }
+ln -sf "$PS2SDK/ee/lib/libptrheadglue.a" "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libptrheadglue.a" || { exit 1; }
 ln -sf "$PS2SDK/ee/lib/libkernel.a"  "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libkernel.a" || { exit 1; }
 ln -sf "$PS2SDK/ee/lib/libcdvd.a"  "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libcdvd.a"  || { exit 1; }
