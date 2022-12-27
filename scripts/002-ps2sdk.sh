@@ -19,18 +19,15 @@ fi
 cd "$REPO_FOLDER" && git fetch origin && git reset --hard "origin/${REPO_REFERENCE}" && git checkout "${REPO_REFERENCE}" || exit 1
 
 ## Determine the maximum number of processes that Make can work with.
-#OSVER=$(uname)
-#if [ ${OSVER:0:10} == MINGW32_NT ]; then
-#  PROC_NR=$NUMBER_OF_PROCESSORS
-#elif [ ${OSVER:0:6} == Darwin ]; then
-#  PROC_NR=$(sysctl -n hw.ncpu)
-#else
-#  PROC_NR=$(nproc)
-#fi
-
-## Build and install
 # Workaround 2018/10/18: remove -j as the ps2toolchain's Makefiles do not have dependencies set up properly.
-make --quiet clean && make --quiet && make --quiet install && make --quiet clean || { exit 1; }
+# PROC_NR=$(getconf _NPROCESSORS_ONLN)
+PROC_NR=1
+
+## Build and install.
+make --quiet -j "$PROC_NR" clean || { exit 1; }
+make --quiet -j "$PROC_NR" || { exit 1; }
+make --quiet -j "$PROC_NR" install || { exit 1; }
+make --quiet -j "$PROC_NR" clean || { exit 1; }
 
 ## gcc needs to include libcglue, libptrheadglue, libkernel and libcdvd from ps2sdk to be able to build executables,
 ## because they are part of the standard libraries
