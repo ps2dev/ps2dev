@@ -18,7 +18,7 @@ jobs:
       shell: ${{ matrix.os[1] }} {0}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
@@ -60,13 +60,13 @@ jobs:
 
     - name: Get short SHA
       id: slug
-      run: echo "::set-output name=sha8::${MSYSTEM}-sha[$(echo ${GITHUB_SHA} | cut -c1-8)]"
+      run: echo "sha8=${MSYSTEM}-sha[$(echo ${GITHUB_SHA} | cut -c1-8)" >> $GITHUB_OUTPUT
 
     - name: Prepare ps2dev folder
       run: |
         tar -zcvf ps2dev-${{matrix.os[0]}}.tar.gz ps2dev
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: ps2dev-${{matrix.os[0]}}-${{ steps.slug.outputs.sha8 }}
         path: ps2dev-${{matrix.os[0]}}.tar.gz
@@ -74,7 +74,7 @@ jobs:
     - name: Extract tag name
       if: startsWith(github.ref, 'refs/tags/')
       id: tag
-      run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      run: echo "VERSION=${GITHUB_REF/refs\/tags\//}" >> $GITHUB_OUTPUT
 
     - name: Create pre-release
       if: github.ref == 'refs/heads/master'

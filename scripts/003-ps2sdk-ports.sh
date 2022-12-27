@@ -1,9 +1,9 @@
 #!/bin/bash
-# gsKit.sh by fjtrujy
+# ps2sdk-ports.sh by fjtrujy
 
 ## Download the source code.
-REPO_URL="https://github.com/ps2dev/gskit"
-REPO_FOLDER="gskit"
+REPO_URL="https://github.com/ps2dev/ps2sdk-ports"
+REPO_FOLDER="ps2sdk-ports"
 
 # Checking if a specific TAG has been selected, it is passed using parameter $1
 [  -z "$1" ] && REPO_REFERENCE="master" || REPO_REFERENCE=$1
@@ -14,5 +14,8 @@ if test ! -d "$REPO_FOLDER"; then
 fi
 cd "$REPO_FOLDER" && git fetch origin && git reset --hard "origin/${REPO_REFERENCE}" && git checkout "${REPO_REFERENCE}" || exit 1
 
+## Determine the maximum number of processes that Make can work with.
+PROC_NR=$(getconf _NPROCESSORS_ONLN)
+
 ## Build and install.
-make --quiet clean && make --quiet && make --quiet install && make --quiet clean || { exit 1; }
+make --quiet -j "$PROC_NR" || { exit 1; }

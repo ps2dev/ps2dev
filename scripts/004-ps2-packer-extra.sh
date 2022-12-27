@@ -14,5 +14,11 @@ if test ! -d "$REPO_FOLDER"; then
 fi
 cd $REPO_FOLDER && git fetch origin && git reset --hard "origin/${REPO_REFERENCE}" && git checkout "${REPO_REFERENCE}" || exit 1
 
+## Determine the maximum number of processes that Make can work with.
+PROC_NR=$(getconf _NPROCESSORS_ONLN)
+
 ## Build and install.
-make --quiet clean && make --quiet && make --quiet install && make --quiet clean || { exit 1; }
+make --quiet -j "$PROC_NR" clean || { exit 1; }
+make --quiet -j "$PROC_NR" || { exit 1; }
+make --quiet -j "$PROC_NR" install || { exit 1; }
+make --quiet -j "$PROC_NR" clean || { exit 1; }
