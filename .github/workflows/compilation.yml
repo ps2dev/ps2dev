@@ -42,10 +42,11 @@ jobs:
       with:
         msystem: MINGW32
         install: |
-          base-devel git make texinfo flex bison patch binutils mingw-w64-i686-gcc mpc-devel tar
-          mingw-w64-i686-cmake mingw-w64-i686-extra-cmake-modules mingw-w64-i686-make
-        update: true
+          base-devel git make texinfo flex bison patch binutils mpc-devel tar
+        update: false
         shell: msys2 {0}
+        pacboy: >-
+          make:i gcc:i extra-cmake-modules:i
 
     - name: Runs all the stages in the shell
       continue-on-error: true
