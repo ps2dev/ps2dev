@@ -1,22 +1,39 @@
 #!/bin/bash
-# ps2sdk.sh by Naomi Peori (naomi@peori.ca)
-# changed to use Git by Mathias Lafeldt <misfire@debugon.org>
+# 002-ps2sdk.sh by ps2dev developers
+
+## Exit with code 1 when any command executed returns a non-zero exit code.
+onerr()
+{
+  exit 1;
+}
+trap onerr ERR
+
+## Read information from the configuration file.
+source "$(dirname "$0")/../config/ps2dev-config.sh"
+
+## Download the source code.
+REPO_URL="$PS2SDK_REPO_URL"
+REPO_REF="$PS2SDK_DEFAULT_REPO_REF"
+REPO_FOLDER="$(s="$REPO_URL"; s=${s##*/}; printf "%s" "${s%.*}")"
+
+# Checking if a specific Git reference has been passed in parameter $1
+if test -n "$1"; then
+  REPO_REF="$1"
+  printf 'Using specified repo reference %s\n' "$REPO_REF"
+fi
+
+if test ! -d "$REPO_FOLDER"; then
+  git clone --depth 1 -b "$REPO_REF" "$REPO_URL" "$REPO_FOLDER"
+else
+  git -C "$REPO_FOLDER" fetch origin
+  git -C "$REPO_FOLDER" reset --hard "origin/$REPO_REF"
+  git -C "$REPO_FOLDER" checkout "$REPO_REF"
+fi
+
+cd "$REPO_FOLDER"
 
 # make sure ps2sdk's makefile does not use it
 unset PS2SDKSRC
-
-## Download the source code.
-REPO_URL="https://github.com/ps2dev/ps2sdk"
-REPO_FOLDER="ps2sdk"
-
-# Checking if a specific TAG has been selected, it is passed using parameter $1
-[  -z "$1" ] && REPO_REFERENCE="master" || REPO_REFERENCE=$1
-echo "Using repo reference $REPO_REFERENCE"
-
-if test ! -d "$REPO_FOLDER"; then
-  git clone $REPO_URL -b "${REPO_REFERENCE}" || exit 1
-fi
-cd "$REPO_FOLDER" && git fetch origin && git reset --hard "origin/${REPO_REFERENCE}" && git checkout "${REPO_REFERENCE}" || exit 1
 
 ## Determine the maximum number of processes that Make can work with.
 # Workaround 2018/10/18: remove -j as the ps2toolchain's Makefiles do not have dependencies set up properly.
@@ -24,14 +41,14 @@ cd "$REPO_FOLDER" && git fetch origin && git reset --hard "origin/${REPO_REFEREN
 PROC_NR=1
 
 ## Build and install.
-make --quiet -j "$PROC_NR" clean || { exit 1; }
-make --quiet -j "$PROC_NR" || { exit 1; }
-make --quiet -j "$PROC_NR" install || { exit 1; }
-make --quiet -j "$PROC_NR" clean || { exit 1; }
+make --quiet -j "$PROC_NR" clean
+make --quiet -j "$PROC_NR"
+make --quiet -j "$PROC_NR" install
+make --quiet -j "$PROC_NR" clean
 
-## gcc needs to include libcglue, libptrheadglue, libkernel and libcdvd from ps2sdk to be able to build executables,
+## gcc needs to include libcglue, libpthreadglue, libkernel and libcdvd from ps2sdk to be able to build executables,
 ## because they are part of the standard libraries
-ln -sf "$PS2SDK/ee/lib/libcglue.a" "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libcglue.a" || { exit 1; }
-ln -sf "$PS2SDK/ee/lib/libpthreadglue.a" "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libpthreadglue.a" || { exit 1; }
-ln -sf "$PS2SDK/ee/lib/libkernel.a"  "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libkernel.a" || { exit 1; }
-ln -sf "$PS2SDK/ee/lib/libcdvd.a"  "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libcdvd.a"  || { exit 1; }
+ln -sf "$PS2SDK/ee/lib/libcglue.a" "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libcglue.a"
+ln -sf "$PS2SDK/ee/lib/libpthreadglue.a" "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libpthreadglue.a"
+ln -sf "$PS2SDK/ee/lib/libkernel.a"  "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libkernel.a"
+ln -sf "$PS2SDK/ee/lib/libcdvd.a"  "$PS2DEV/ee/mips64r5900el-ps2-elf/lib/libcdvd.a"
