@@ -5,6 +5,7 @@ on:
   pull_request:
   repository_dispatch:
     types: [run_build]
+  workflow_dispatch: {}
 
 jobs:
   build:
@@ -22,21 +23,21 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Install Ubuntu texinfo bison flex libucl-dev
+    - name: Install Ubuntu packages
       if: matrix.os[0] == 'ubuntu-latest'
       run: |
         sudo apt-get update
         sudo apt-get -y install texinfo bison flex gettext libgmp3-dev libmpfr-dev libmpc-dev
         echo "MSYSTEM=x64" >> $GITHUB_ENV
 
-    - name: Install Mac texinfo bison flex ucl
-      if: matrix.os[0] == 'macOS-latest'
+    - name: Install macOS packages
+      if: matrix.os[0] == 'macos-latest'
       run: |
         brew update
         brew install texinfo bison flex gnu-sed gsl gmp mpfr libmpc
         echo "MSYSTEM=x64" >> $GITHUB_ENV
 
-    - name: Install MSYS2 texinfo bison flex
+    - name: Install MSYS2 packages
       if: matrix.os[0] == 'windows-latest'
       uses: msys2/setup-msys2@v2
       with:
