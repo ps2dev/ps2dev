@@ -20,6 +20,18 @@ These scripts download (`git clone`) and install:
 ## Requirements
 
 1.  Install gcc/clang, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib, mpfr and mpc if you don't have those packages.
+- Ubuntu
+```bash
+sudo apt -y install gcc make cmake patch git texinfo flex bison gettext libgsl-dev libgmp3-dev libmpfr-dev libmpc-dev zlib1g-dev
+```
+- Fedora/CentOS
+```bash
+sudo dnf -y install gcc make cmake patch git texinfo flex bison gettext gmp-devel mpfr-devel libmpc zlib-devel
+```
+- Alpine
+```bash
+apk add build-base cmake git texinfo flex bison gettext gmp-dev mpfr-dev mpc1-dev zlib-dev
+```
 2.  _Optional._ If you are upgrading from the previous version of the PS2DEV environment, it is highly recommended to remove the content of the PS2DEV folder before upgrade. This is a necessary step after the major toolchain upgrade.
 ```bash
 sudo rm -rf $PS2DEV
