@@ -24,11 +24,11 @@ These scripts download (`git clone`) and install:
 ```bash
 sudo apt -y install gcc make cmake patch git texinfo flex bison gettext libgsl-dev libgmp3-dev libmpfr-dev libmpc-dev zlib1g-dev
 ```
--  Fedora/CentOS
+  - Fedora/CentOS
 ```bash
 sudo dnf -y install gcc make cmake patch git texinfo flex bison gettext gmp-devel mpfr-devel libmpc zlib-devel
 ```
--  Alpine
+  - Alpine
 ```bash
 apk add build-base cmake git texinfo flex bison gettext gmp-dev mpfr-dev mpc1-dev zlib-dev
 ```
