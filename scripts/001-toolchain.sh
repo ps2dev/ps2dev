@@ -26,7 +26,7 @@ if test ! -d "$REPO_FOLDER"; then
   git clone --depth 1 -b "$REPO_REF" "$REPO_URL" "$REPO_FOLDER"
 else
   git -C "$REPO_FOLDER" fetch origin
-  git -C "$REPO_FOLDER" reset --hard "origin/$REPO_REF"
+  git -C "$REPO_FOLDER" reset --hard "$REPO_REF"
   git -C "$REPO_FOLDER" checkout "$REPO_REF"
 fi
 
