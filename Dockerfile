@@ -4,7 +4,7 @@ FROM $BASE_DOCKER_IMAGE
 
 COPY . /src
 
-RUN apk add build-base git bash patch wget zlib-dev ucl-dev
+RUN apk add build-base git bash patch wget zlib-dev ucl-dev cmake curl
 RUN cd /src && ./build-extra.sh
 
 # Second stage of Dockerfile
