@@ -12,7 +12,7 @@ jobs:
     runs-on: ${{ matrix.os[0] }}
     strategy:
       matrix:
-        os: [[macos-latest, bash], [ubuntu-latest, bash], [windows-latest, msys2]]
+        os: [[macos-13, bash], [ubuntu-latest, bash], [windows-latest, msys2]]
       fail-fast: false
     defaults:
      run:
@@ -28,7 +28,7 @@ jobs:
         sudo apt-get -y install texinfo bison flex gettext libgmp3-dev libmpfr-dev libmpc-dev
 
     - name: Install macOS packages
-      if: matrix.os[0] == 'macos-latest'
+      if: startsWith(matrix.os[0], 'macos')
       run: |
         brew update
         brew install texinfo bison flex gnu-sed gsl gmp mpfr libmpc
