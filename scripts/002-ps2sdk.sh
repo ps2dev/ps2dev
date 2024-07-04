@@ -39,10 +39,10 @@ unset PS2SDKSRC
 PROC_NR=$(getconf _NPROCESSORS_ONLN)
 
 ## Build and install.
-make --quiet -j "$PROC_NR" clean
-make --quiet -j "$PROC_NR"
-make --quiet -j "$PROC_NR" install
-make --quiet -j "$PROC_NR" clean
+make -j "$PROC_NR" clean
+make -j "$PROC_NR"
+make -j "$PROC_NR" install
+make -j "$PROC_NR" clean
 
 ## gcc needs to include libcglue, libpthreadglue, libkernel and libcdvd from ps2sdk to be able to build executables,
 ## because they are part of the standard libraries

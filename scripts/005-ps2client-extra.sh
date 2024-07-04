@@ -36,7 +36,7 @@ cd "$REPO_FOLDER"
 PROC_NR=$(getconf _NPROCESSORS_ONLN)
 
 ## Build and install.
-make --quiet -j "$PROC_NR" clean
-make --quiet -j "$PROC_NR"
-make --quiet -j "$PROC_NR" install
-make --quiet -j "$PROC_NR" clean
+make -j "$PROC_NR" clean
+make -j "$PROC_NR"
+make -j "$PROC_NR" install
+make -j "$PROC_NR" clean
