@@ -36,9 +36,7 @@ cd "$REPO_FOLDER"
 unset PS2SDKSRC
 
 ## Determine the maximum number of processes that Make can work with.
-# Workaround 2018/10/18: remove -j as the ps2toolchain's Makefiles do not have dependencies set up properly.
-# PROC_NR=$(getconf _NPROCESSORS_ONLN)
-PROC_NR=1
+PROC_NR=$(getconf _NPROCESSORS_ONLN)
 
 ## Build and install.
 make --quiet -j "$PROC_NR" clean
