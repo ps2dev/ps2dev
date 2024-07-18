@@ -25,9 +25,9 @@ fi
 if test ! -d "$REPO_FOLDER"; then
   git clone --depth 1 -b "$REPO_REF" "$REPO_URL" "$REPO_FOLDER"
 else
-  git -C "$REPO_FOLDER" fetch origin
-  git -C "$REPO_FOLDER" reset --hard "origin/$REPO_REF"
-  git -C "$REPO_FOLDER" checkout "$REPO_REF"
+  git -C "$REPO_FOLDER" remote set-url origin "$REPO_URL"
+  git -C "$REPO_FOLDER" fetch origin "$REPO_REF" --depth=1
+  git -C "$REPO_FOLDER" checkout -f FETCH_HEAD
 fi
 
 cd "$REPO_FOLDER"
@@ -36,15 +36,13 @@ cd "$REPO_FOLDER"
 unset PS2SDKSRC
 
 ## Determine the maximum number of processes that Make can work with.
-# Workaround 2018/10/18: remove -j as the ps2toolchain's Makefiles do not have dependencies set up properly.
-# PROC_NR=$(getconf _NPROCESSORS_ONLN)
-PROC_NR=1
+PROC_NR=$(getconf _NPROCESSORS_ONLN)
 
 ## Build and install.
-make --quiet -j "$PROC_NR" clean
-make --quiet -j "$PROC_NR"
-make --quiet -j "$PROC_NR" install
-make --quiet -j "$PROC_NR" clean
+make -j "$PROC_NR" clean
+make -j "$PROC_NR"
+make -j "$PROC_NR" install
+make -j "$PROC_NR" clean
 
 ## gcc needs to include libcglue, libpthreadglue, libkernel and libcdvd from ps2sdk to be able to build executables,
 ## because they are part of the standard libraries

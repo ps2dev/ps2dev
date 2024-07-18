@@ -25,9 +25,9 @@ fi
 if test ! -d "$REPO_FOLDER"; then
   git clone --depth 1 -b "$REPO_REF" "$REPO_URL" "$REPO_FOLDER"
 else
-  git -C "$REPO_FOLDER" fetch origin
-  git -C "$REPO_FOLDER" reset --hard "origin/$REPO_REF"
-  git -C "$REPO_FOLDER" checkout "$REPO_REF"
+  git -C "$REPO_FOLDER" remote set-url origin "$REPO_URL"
+  git -C "$REPO_FOLDER" fetch origin "$REPO_REF" --depth=1
+  git -C "$REPO_FOLDER" checkout -f FETCH_HEAD
 fi
 
 cd "$REPO_FOLDER"
@@ -36,7 +36,7 @@ cd "$REPO_FOLDER"
 PROC_NR=$(getconf _NPROCESSORS_ONLN)
 
 ## Build and install.
-make --quiet -j "$PROC_NR" clean
-make --quiet -j "$PROC_NR"
-make --quiet -j "$PROC_NR" install
-make --quiet -j "$PROC_NR" clean
+make -j "$PROC_NR" clean
+make -j "$PROC_NR"
+make -j "$PROC_NR" install
+make -j "$PROC_NR" clean
