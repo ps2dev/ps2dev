@@ -2,6 +2,12 @@
 
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ps2dev/ps2dev/compilation.yml?branch=master&label=CI&logo=github&style=for-the-badge)](https://github.com/ps2dev/ps2dev/actions?query=workflow%3ACI)[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/ps2dev/ps2dev/docker.yml?branch=master&label=CI&logo=github&style=for-the-badge)](https://github.com/ps2dev/ps2dev/actions?query=workflow%3ACI-Docker)[![Docker Pulls](https://img.shields.io/docker/pulls/ps2dev/ps2dev?style=for-the-badge)](https://hub.docker.com/r/ps2dev/ps2dev/tags)
 
+## **ATTENTION**
+
+If you are confused on how to start developing for PS2, see the [getting started](https://ps2dev.github.io/#getting-started) section on the ps2dev main page.  
+
+## Overview
+
 Main PS2 Repo for building the whole `PS2 Development` environment in your local machine.
 
 This program will automatically build and install the whole compiler and other tools used in the creation of homebrew software for the Sony PlayStation® 2 videogame system.
@@ -79,5 +85,9 @@ If you download the pre-built macOS binaries and get a security error such as _`
 ```bash
 xattr -dr com.apple.quarantine path/to/prebuilt/ps2toolchain
 ```
+
+## Community
+
+Links for discussion and chat are available [here](https://ps2dev.github.io/#community).  
 
 ## Thanks
