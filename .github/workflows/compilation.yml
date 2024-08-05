@@ -36,7 +36,7 @@ jobs:
       if: startsWith(matrix.os[0], 'macos')
       run: |
         brew update
-        brew install texinfo bison flex gnu-sed autoconf automake libtool gsl gmp mpfr libmpc
+        brew install texinfo bison flex gnu-sed autoconf automake libtool gsl gmp mpfr libmpc md5sha1sum
 
     - name: Install MSYS2 packages
       if: matrix.os[0] == 'windows-latest'
