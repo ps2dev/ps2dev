@@ -30,7 +30,7 @@ These scripts download (`git clone`) and install:
 -   Ubuntu
 
 ```bash
-sudo apt -y install gcc g++ make cmake patch git texinfo flex bison gettext libgsl-dev libgmp3-dev libmpfr-dev libmpc-dev zlib1g-dev
+sudo apt -y install gcc g++ make cmake patch git texinfo flex bison gettext libgsl-dev libgmp3-dev libmpfr-dev libmpc-dev zlib1g-dev autopoint
 ```
 
 -   Fedora/CentOS
