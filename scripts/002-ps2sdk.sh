@@ -40,7 +40,10 @@ PROC_NR=$(getconf _NPROCESSORS_ONLN)
 
 ## Build and install.
 make -j "$PROC_NR" clean
-make -j "$PROC_NR"
+make -j "$PROC_NR" || make -j "$PROC_NR" clean
+## If the multi-job build failed, then build it with a single job.
+## Otherwise, it won't build anything since it is already built.
+make -j 1
 make -j "$PROC_NR" install
 make -j "$PROC_NR" clean
 
