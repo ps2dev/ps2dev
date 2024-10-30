@@ -1,7 +1,7 @@
 # Use a user-defined base image and set default one
 ARG BASE_DOCKER_IMAGE=ghcr.io/ps2dev/ps2sdk-ports:latest
 # First build stage
-FROM $BASE_DOCKER_IMAGE
+FROM $BASE_DOCKER_IMAGE AS build
 
 WORKDIR /src
 
@@ -25,6 +25,6 @@ ENV GSKIT $PS2DEV/gsKit
 ENV PATH $PATH:${PS2DEV}/bin:${PS2DEV}/ee/bin:${PS2DEV}/iop/bin:${PS2DEV}/dvp/bin:${PS2SDK}/bin
 
 # Copy the compiled PS2 Dev files from the first stage
-COPY --from=0 ${PS2DEV} ${PS2DEV}
+COPY --from=build ${PS2DEV} ${PS2DEV}
 
 WORKDIR /workspace  # Set a default working directory
