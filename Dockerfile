@@ -1,6 +1,5 @@
 # Use a user-defined base image
-ARG BASE_DOCKER_IMAGE:latest
-
+ARG BASE_DOCKER_IMAGE
 # First build stage
 FROM $BASE_DOCKER_IMAGE AS build
 
