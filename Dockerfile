@@ -1,5 +1,5 @@
-# Use a user-defined base image
-ARG BASE_DOCKER_IMAGE
+# Use a user-defined base image and set default one
+ARG BASE_DOCKER_IMAGE=ghcr.io/ps2dev/ps2sdk-ports
 # First build stage
 FROM $BASE_DOCKER_IMAGE AS build
 
