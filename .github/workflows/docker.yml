@@ -6,6 +6,8 @@ on:
       - master
     tags:
       - v*
+    paths-ignore:
+      - '**.md'
   repository_dispatch:
     types: [run_build]
 
