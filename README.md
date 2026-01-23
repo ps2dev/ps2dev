@@ -85,10 +85,17 @@ export PATH=$PATH:$PS2DEV/bin:$PS2DEV/ee/bin:$PS2DEV/iop/bin:$PS2DEV/dvp/bin:$PS
 
 5. *Optional.* To install the precompiled toolchain, perform the following
 
+If your Linux distro or MacOS is up to date, run this:
 ```bash
 curl -o ps2dev-latest.tar.gz -LC - https://github.com/ps2dev/ps2dev/releases/download/latest/ps2dev-$(if [[ "$OSTYPE" == "darwin"* ]]; then echo macos; else echo ubuntu; fi)-latest.tar.gz
 tar -xf ps2dev-latest.tar.gz --strip-components 1 -C $PS2DEV
 ```
+If you're on Raspberry Pi OS, run this:
+```bash
+curl -o ps2dev-latest.tar.gz -LC - https://github.com/ps2dev/ps2dev/releases/download/latest/ps2dev-ubuntu-22.04-arm.tar.gz
+tar -xf ps2dev-latest.tar.gz --strip-components 1 -C $PS2DEV
+```
+There are also precompiled toolchains for Windows (x86), MacOS 13 and Linux 24.04 (ARM, GLIBC 3.28) at https://github.com/ps2dev/ps2dev/releases
 
 6. *Optional.* To build and install the toolchain from source, clone the repository, then run `build-all.sh`
 
