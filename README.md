@@ -27,12 +27,12 @@ These scripts download (`git clone`) and install:
 
 ## Requirements
 
-1. Install gcc/clang, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib, mpfr and mpc if you don't have those packages.
+1. Install gcc/clang, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib, curl, mpfr and mpc if you don't have those packages.
 
 * Ubuntu
 
 ```bash
-sudo apt -y install gcc g++ make cmake patch git texinfo flex bison gettext libgsl-dev libgmp3-dev libmpfr-dev libmpc-dev zlib1g-dev autopoint
+sudo apt -y install gcc g++ make cmake patch git texinfo flex bison gettext curl libgsl-dev libgmp3-dev libmpfr-dev libmpc-dev zlib1g-dev autopoint
 ```
 
 * Fedora/CentOS
