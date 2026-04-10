@@ -50,7 +50,7 @@ apk add build-base cmake git texinfo flex bison gettext gmp-dev mpfr-dev mpc1-de
 * Void
 
 ```bash
-sudo xbps-install -Su mpfr libmpc-devel base-devel bison gettext texinfo gmp-devel gsl-devel zlib-devel cmake patch git boost-devel boost
+sudo xbps-install -Su mpfr libmpc-devel base-devel bison gettext gettext-devel-tools texinfo gmp-devel gsl-devel zlib-devel cmake patch git boost-devel boost
 ```
 
 * Arch
