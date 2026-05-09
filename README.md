@@ -105,6 +105,14 @@ cd ps2dev
 ./build-all.sh
 ```
 
+7. "Optional.* To use `mips64r5900el-ps2-elf-pkg-config` in your Makefile/CMakeLists.txt if you downloaded `PS2DEV` from GitHub Actions.
+
+```bash
+sed -i'' "s|/__w/ps2dev/ps2dev/ps2dev/ps2sdk/ports|${PS2SDK}/ports|g"   "$PS2SDK"/ports/lib/pkgconfig/*.pc
+sed -i'' "s|/__w/ps2dev/ps2dev/ps2dev/ps2sdk/ports|${PS2SDK}/ports|g"   "$GSKIT"/lib/pkgconfig/*.pc
+sed -i'' "s|/__w/ps2dev/ps2dev/ps2dev/gsKit|${GSKIT}/|g"   "$GSKIT"/lib/pkgconfig/*.pc
+```
+
 ## Container image generation
 
 This repo also uses CI/CD to create a container image, compatible with Docker and Podman, called `ps2dev/ps2dev:latest` per change. This is useful if you're a developer that wants to create/port an application to the PS2. You can compile your project using this container image.
