@@ -98,7 +98,7 @@ jobs:
       run: |
         curl -LO https://raw.githubusercontent.com/GiovanniBussi/macports-ci/master/macports-ci
         . ./macports-ci install --remove-brew --version=2.11.5 --sync=rsync
-        sudo port install gsl gmp mpfr libmpc libiconv bison flex gsed texinfo autoconf automake libtool md5sha1sum wget curl cmake
+        sudo port install gsl gmp mpfr libmpc libiconv bison flex gsed texinfo autoconf automake libtool md5sha1sum wget curl cmake gettext
 
     - name: Install MSYS2 packages
       if: startsWith(matrix.os.runs-on, 'windows')
