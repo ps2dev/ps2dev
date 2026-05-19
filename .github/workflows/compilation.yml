@@ -109,7 +109,7 @@ jobs:
           base-devel git make texinfo flex bison patch binutils mpc-devel tar wget curl
           autotools gettext gettext-devel
           mingw-w64-i686-readline mingw-w64-i686-gcc mingw-w64-i686-cmake 
-          mingw-w64-i686-make mingw-w64-i686-libogg
+          mingw-w64-i686-make mingw-w64-i686-libogg mingw-w64-i686-libgnurx
         update: true
 
     - name: Runs all the stages in the shell
