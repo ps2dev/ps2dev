@@ -81,7 +81,7 @@ jobs:
       if: startsWith(matrix.os.runs-on, 'ubuntu')
       run: |
         apt-get -y update
-        apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install texinfo bison flex gettext autopoint autoconf automake libtool libgmp3-dev libmpfr-dev libmpc-dev g++ gcc git libgsl-dev make patch zlib1g-dev wget curl ca-certificates gpg
+        apt-get -y -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install texinfo bison flex gettext autopoint autoconf automake libtool libgmp3-dev libmpfr-dev libmpc-dev g++ gcc git libgsl-dev make patch zlib1g-dev wget curl ca-certificates gpg pkg-config
         # Install newer cmake (3.20+) from Kitware's official repository
         # Ubuntu 20.04's default cmake is 3.16.3, but xz v5.8.1 requires 3.20+
         curl -LsSf https://apt.kitware.com/kitware-archive.sh | sh
