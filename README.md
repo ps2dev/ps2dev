@@ -27,7 +27,7 @@ These scripts download (`git clone`) and install:
 
 ## Requirements
 
-1. Install automake, gcc/clang, libtool, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib, mpfr and mpc if you don't have those packages.
+1. Install autoconf, automake, gcc/clang, libtool, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib, mpfr and mpc if you don't have those packages.
 
 * Ubuntu
 
@@ -38,7 +38,7 @@ sudo apt -y install gcc g++ make cmake patch git texinfo flex bison gettext libg
 * Fedora/CentOS
 
 ```bash
-sudo dnf -y install automake gcc gcc-c++ libtool make cmake patch git texinfo flex bison gettext gmp-devel mpfr-devel libmpc-devel zlib-devel
+sudo dnf -y install autoconf automake gcc gcc-c++ libtool make cmake patch git texinfo flex bison gettext gmp-devel mpfr-devel libmpc-devel zlib-devel
 ```
 
 * Alpine
