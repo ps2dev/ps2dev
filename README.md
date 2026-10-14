@@ -38,7 +38,7 @@ sudo apt -y install gcc g++ make cmake patch git texinfo flex bison gettext libg
 * Fedora/CentOS
 
 ```bash
-sudo dnf -y install gcc make cmake patch git texinfo flex bison gettext gmp-devel mpfr-devel libmpc-devel zlib-devel
+sudo dnf -y install gcc gcc-c++ make cmake patch git texinfo flex bison gettext gmp-devel mpfr-devel libmpc-devel zlib-devel
 ```
 
 * Alpine
