@@ -27,7 +27,7 @@ These scripts download (`git clone`) and install:
 
 ## Requirements
 
-1. Install autoconf, automake, gcc/clang, libtool, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib, mpfr and mpc if you don't have those packages.
+1. Install autoconf, automake, gcc/clang (with C++ support), libtool, make, cmake, patch, git, texinfo, flex, bison, gettext, wget, gsl, gmp, zlib, mpfr and mpc if you don't have those packages.
 
 * Ubuntu
 
