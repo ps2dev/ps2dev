@@ -23,6 +23,27 @@ env:
   TZ: Japan
 
 jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    if: ${{ (github.ref_type == 'tag') && (github.repository_owner == 'ps2dev') }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Generate Changelog
+      run: |
+        echo "We are pleased to announce the ${{ github.ref_name }} release of ps2dev, an open source development environment for making Playstation 2 homebrew." > changelog.md
+        echo "" >> changelog.md
+        echo "For information on how to install and use the ps2dev, take a look at [our website](https://ps2dev.github.io/)." >> changelog.md
+        echo "" >> changelog.md
+        ./build-changelog.sh >> changelog.md
+    - name: Create Release
+      uses: softprops/action-gh-release@v2
+      with:
+        body_path: changelog.md
+        make_latest: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   build:
     strategy:
       matrix:
