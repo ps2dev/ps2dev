@@ -71,7 +71,7 @@ jobs:
     container:
       image: ${{ matrix.os.container }}
       options: ${{ matrix.os.container-options }}
-    timeout-minutes: 240
+    timeout-minutes: 340
 
     steps:
     - name: Checkout repository
@@ -104,12 +104,13 @@ jobs:
       if: startsWith(matrix.os.runs-on, 'windows')
       uses: msys2/setup-msys2@v2
       with:
-        msystem: MINGW32
+        msystem: UCRT64
         install: |
           base-devel git make texinfo flex bison patch binutils mpc-devel tar wget curl
           autotools gettext gettext-devel
-          mingw-w64-i686-readline mingw-w64-i686-gcc mingw-w64-i686-cmake 
-          mingw-w64-i686-make mingw-w64-i686-libogg mingw-w64-i686-libgnurx
+          mingw-w64-ucrt-x86_64-readline mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake
+          mingw-w64-ucrt-x86_64-make mingw-w64-ucrt-x86_64-libogg mingw-w64-ucrt-x86_64-libsystre
+          mingw-w64-ucrt-x86_64-pkgconf
         update: true
 
     - name: Runs all the stages in the shell
