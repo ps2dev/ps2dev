@@ -12,6 +12,10 @@ if command -v port &> /dev/null && command -v gsed &> /dev/null; then
     ln -sf "$(command -v gsed)" "$GNU_SED_SHIM_DIR/sed"
     export PATH="$GNU_SED_SHIM_DIR:$PATH"
 fi
+# Workaround for ./build-cmakelibs.sh: line 33: MINGW64-make: command not found
+if command -v mingw32-make.exe &> /dev/null; then
+  ln -sf /ucrt64/bin/mingw32-make.exe /ucrt64/bin/MINGW64-make.exe
+fi
 export PATH=$PATH:$PS2DEV/bin
 export PATH=$PATH:$PS2DEV/iop/bin
 export PATH=$PATH:$PS2DEV/ee/bin
